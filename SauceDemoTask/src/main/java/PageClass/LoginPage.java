@@ -64,4 +64,14 @@ public class LoginPage {
 			PageClassManager.ValidateContent(sErrorMessage, sExpectedMessage, "Error Message Validation");
 		}
 	}
+	
+	//Method for Login 
+	public void validUserLogin(String sUserName, String sPassword) {
+		PageClassManager.logInfo(sUserName, "Validating "+sUserName+" login");
+		driver.findElement(user).clear();
+		driver.findElement(user).sendKeys(sUserName);
+		driver.findElement(password).clear();
+		driver.findElement(password).sendKeys(sPassword);
+		driver.findElement(login).click();
+	}
 }

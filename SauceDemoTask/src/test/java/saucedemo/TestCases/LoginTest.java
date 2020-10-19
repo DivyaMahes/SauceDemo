@@ -24,6 +24,24 @@ public class LoginTest {
 		pageObj.loginPage.validateInvalidLogin(sUserName, sPassword);		
 	}
 	
+	//Standard User login validation
+	@Test(dataProvider = "ValidLogin",priority=3)
+	public void standardUser(String sUserName, String sPassword) throws Exception {
+		pageObj.loginPage.validUserLogin(sUserName,sPassword);
+		pageObj.standardUser.verifyStandardUser_ProductTitle();
+		pageObj.standardUser.verifyHamburgerMenu();
+		pageObj.standardUser.closeMenu();
+		pageObj.standardUser.imageCheck();
+		pageObj.standardUser.selectProduct("Test.allTheThings() T-Shirt (Red)");
+		pageObj.standardUser.validateProductDescription("Test.allTheThings() T-Shirt (Red)");
+		
+		pageObj.cart.addToCart("Test.allTheThings() T-Shirt (Red)");
+		pageObj.cart.removeCart();
+		pageObj.cart.allItems();	
+		pageObj.standardUser.sort("Name (Z to A)");	
+		pageObj.cart.logOut();
+	}
+	
 	@DataProvider(name="Invalidlogin")
 	public Object[][] getInvaliddata()
 	{
@@ -31,6 +49,13 @@ public class LoginTest {
 			{{"",""},{"standard_user",""},{"standard_user","Test"}};
 	}
 	
+	@DataProvider(name="ValidLogin")
+	public Object[][] getValiddata()
+	{
+	return new Object[][]
+			{{"standard_user","secret_sauce"}};	
+	}
+
 	@AfterTest
 	public void tearDownTest() {
 		pageObj.objWebDriver.close();

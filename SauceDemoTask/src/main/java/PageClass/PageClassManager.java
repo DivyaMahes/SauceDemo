@@ -7,11 +7,15 @@ import Utility.BrowserManager;
 public class PageClassManager extends BrowserManager {
 	
 	public LoginPage loginPage;
+	public StandardUserProduct standardUser;
+	public Cart cart;
 	
 	WebDriver pageClassdriver = objWebDriver;
 	
 	public PageClassManager() {
 		super();
 		loginPage = new LoginPage(this);
+		standardUser = new StandardUserProduct(this);	
+		cart = new Cart(this);
 	}
 }
