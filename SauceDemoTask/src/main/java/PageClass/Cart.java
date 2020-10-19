@@ -41,7 +41,7 @@ public class Cart {
 		}
 	}
 	
-	//Remove an product added to the cart from Your Cart Page
+	//Remove the product added to cart from Your Cart Page
 	public void removeCart() {
 		driver.findElement(productRemove).click();
 	}

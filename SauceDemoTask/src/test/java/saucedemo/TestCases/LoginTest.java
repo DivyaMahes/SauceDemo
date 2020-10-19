@@ -24,20 +24,27 @@ public class LoginTest {
 		pageObj.loginPage.validateInvalidLogin(sUserName, sPassword);		
 	}
 	
-	//Standard User login validation
+	//Standard User and Problem User login user validation
 	@Test(dataProvider = "ValidLogin",priority=3)
 	public void standardUser(String sUserName, String sPassword) throws Exception {
 		pageObj.loginPage.validUserLogin(sUserName,sPassword);
 		pageObj.standardUser.verifyStandardUser_ProductTitle();
-		pageObj.standardUser.verifyHamburgerMenu();
-		pageObj.standardUser.closeMenu();
 		pageObj.standardUser.imageCheck();
 		pageObj.standardUser.selectProduct("Test.allTheThings() T-Shirt (Red)");
 		pageObj.standardUser.validateProductDescription("Test.allTheThings() T-Shirt (Red)");
 		
-		pageObj.cart.addToCart("Test.allTheThings() T-Shirt (Red)");
-		pageObj.cart.removeCart();
-		pageObj.cart.allItems();	
+		if(sUserName.equals("problem_user")) {
+			pageObj.problemUser.findHiddenProduct("Test.allTheThings() T-Shirt (Red");
+			pageObj.cart.addToCart("Test.allTheThings() T-Shirt (Red)");
+			pageObj.cart.allItems();	
+		}
+		else {
+			pageObj.standardUser.verifyHamburgerMenu();
+			pageObj.standardUser.closeMenu();
+			pageObj.cart.addToCart("Test.allTheThings() T-Shirt (Red)");
+			pageObj.cart.removeCart();
+			pageObj.cart.allItems();	
+		}
 		pageObj.standardUser.sort("Name (Z to A)");	
 		pageObj.cart.logOut();
 	}
@@ -53,7 +60,7 @@ public class LoginTest {
 	public Object[][] getValiddata()
 	{
 	return new Object[][]
-			{{"standard_user","secret_sauce"}};	
+			{{"standard_user","secret_sauce"},{"problem_user","secret_sauce"}};	
 	}
 
 	@AfterTest

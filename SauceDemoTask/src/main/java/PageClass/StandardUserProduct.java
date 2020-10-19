@@ -39,7 +39,8 @@ public class StandardUserProduct {
 	}
 	
 	//Method to open Menu
-	public void verifyHamburgerMenu() {
+	public void verifyHamburgerMenu() throws Exception {
+		Thread.sleep(2000);
 		driver.findElement(menu).click();
 		boolean status = driver.findElement(menuList).isDisplayed();	
 		PageClassManager.ValidateStatus(status, "Hamburger Menu - Sidebar is opened");
@@ -114,13 +115,13 @@ public class StandardUserProduct {
 				   "typeof arguments[0].naturalWidth != \"undefined\" && "+
 				   "arguments[0].naturalWidth > 0", driver.findElement(By.xpath("//img[@class='inventory_item_img']")));
 
-				    boolean loaded = false;
-				    if (result instanceof Boolean) {
-				      loaded = (Boolean) result;
-				      if(loaded) 
-				    	  PageClassManager.ValidateStatus(true, "Image loaded");
-				      else
-				    	  PageClassManager.ValidateStatus(false, "Image not loaded");
-				    }
+		 boolean loaded = false;
+		 if (result instanceof Boolean) {
+			loaded = (Boolean) result;
+			if(loaded) 
+				   PageClassManager.ValidateStatus(true, "Image loaded");
+				   else
+				   PageClassManager.ValidateStatus(false, "Image not loaded");
+		}
 	}
 }

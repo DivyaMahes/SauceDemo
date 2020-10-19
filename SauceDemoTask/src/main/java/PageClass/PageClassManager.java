@@ -8,6 +8,7 @@ public class PageClassManager extends BrowserManager {
 	
 	public LoginPage loginPage;
 	public StandardUserProduct standardUser;
+	public ProblemUserProduct problemUser;
 	public Cart cart;
 	
 	WebDriver pageClassdriver = objWebDriver;
@@ -17,5 +18,6 @@ public class PageClassManager extends BrowserManager {
 		loginPage = new LoginPage(this);
 		standardUser = new StandardUserProduct(this);	
 		cart = new Cart(this);
+		problemUser = new ProblemUserProduct(this);
 	}
 }
